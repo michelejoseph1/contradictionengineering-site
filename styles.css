@@ -1,0 +1,65 @@
+/* base styles */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --accent: #0b63ff;
+  --muted: #666666;
+  --maxw: 800px;
+  --radius: 8px;
+  --fs-body: 17px;
+  --fs-h1: 32px;
+  --fs-h2: 22px;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  margin: 0.25em 0;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  margin-top: 2rem;
+}
+
+main {
+  max-width: var(--maxw);
+  width: 100%;
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+}
