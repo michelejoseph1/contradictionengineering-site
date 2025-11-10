@@ -1,1 +1,2 @@
+Compression-Aware Intelligence (CAI) links hallucination to representational conflict under semantic-equivalence rephrasing, and defines compression strain as the measurable signal of that conflict.
 Compresssion-Aware Intelligence states that compression loss → contradiction → compression strain → instability. Hallucination is a representational conflict problem. Compression strain measures it. CAI is the framework for evaluating it.
