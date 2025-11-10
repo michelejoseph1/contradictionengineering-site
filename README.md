@@ -1,0 +1,1 @@
+Compresssion-Aware Intelligence states that compression loss → contradiction → compression strain → instability. Hallucination is a representational conflict problem. Compression strain measures it. CAI is the framework for evaluating it.
