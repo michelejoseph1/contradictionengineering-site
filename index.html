@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contradiction Engineering Lab</title>
-  <meta name="description" content="Contradiction Engineering Lab studies representation instability in intelligent systems using the Compression-Aware Intelligence framework." />
-  <meta name="keywords" content="Contradiction Engineering, Compression-Aware Intelligence, CAI, Contradish, reasoning stability, AI reliability" />
-  <meta name="author" content="Michele Joseph" />
-  <link rel="canonical" href="https://www.contradictionengineering.com/" />
-  <meta property="og:title" content="Contradiction Engineering Lab" />
-  <meta property="og:description" content="Founded by Michele Joseph. Research and tools for contradiction detection, reasoning stability, and CAI." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.contradictionengineering.com/" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contradiction Engineering — Semantic Invariance Testing for AI</title>
+<meta name="description" content="Contradiction Engineering Lab: framework and tools for detecting representation instability in AI systems. Catch the failures correctness-only evaluation misses." />
+<meta name="keywords" content="Contradiction Engineering, Compression-Aware Intelligence, CAI, Contradish, semantic invariance, AI reliability, representation instability" />
+<meta name="author" content="Michele Joseph" />
+<link rel="canonical" href="https://www.contradictionengineering.com/" />
+<meta property="og:title" content="Contradiction Engineering — Semantic Invariance Testing for AI" />
+<meta property="og:description" content="Same meaning in. Different world out. That gap is where AI breaks." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.contradictionengineering.com/" />
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
 <header class="site-header">
-  <div class="site-logo"><span>//</span> Contradiction Engineering Lab</div>
+  <div class="site-logo"><span>//</span> Contradiction Engineering</div>
   <nav class="site-nav">
     <a href="#cai">CAI</a>
-    <a href="#types">Contradiction Types</a>
-    <a href="#scoring">Scoring</a>
+    <a href="#types">Taxonomy</a>
+    <a href="#scoring">CTS</a>
     <a href="#contradish">Contradish</a>
     <a href="#papers">Research</a>
     <a href="#contact">Contact</a>
@@ -32,12 +32,45 @@
 
 <div class="hero">
   <div class="hero-label">Compression-Aware Intelligence</div>
-  <h1>The study of what breaks<br>when meaning is preserved<br>but <em>representation isn't.</em></h1>
-  <p class="hero-sub">Contradiction Engineering detects where intelligent systems break under semantic pressure. Same meaning, different output. That's the failure class we study.</p>
-  <div class="hero-axiom">
-    <span class="label">Core Axiom</span>
-    "Same meaning in, different world out."
-    That gap is where intelligence collapses.
+  <h1>Same meaning in.<br><em>Different world out.</em></h1>
+  <p class="hero-sub">That gap is where AI breaks. Contradiction Engineering is the framework for finding it — systematically, before your users do.</p>
+  <div class="hero-axiom-row">
+    <div class="hero-axiom">
+      <span class="label">The Failure Class</span>
+      Not hallucination. Not accuracy. <strong>Representation instability under semantic-preserving transformation.</strong> Same question, different phrasing, contradictory answer. That is what CAI detects.
+    </div>
+    <div class="hero-axiom hero-axiom--right">
+      <span class="label">Why It's Invisible</span>
+      Standard eval asks: is the answer correct?<br>CAI asks: does the answer stay consistent when the question is rephrased?<br>Most evals never run the second test.
+    </div>
+  </div>
+</div>
+
+<div class="signal-bar">
+  <div class="signal-bar-inner">
+    <div class="signal-item">
+      <div class="signal-num">01</div>
+      <div class="signal-label">Conclusion Flips</div>
+      <div class="signal-badge-inline critical">P0</div>
+    </div>
+    <div class="signal-sep">to</div>
+    <div class="signal-item">
+      <div class="signal-num">02</div>
+      <div class="signal-label">Constraint Violations</div>
+      <div class="signal-badge-inline critical">P0</div>
+    </div>
+    <div class="signal-sep">to</div>
+    <div class="signal-item">
+      <div class="signal-num">03</div>
+      <div class="signal-label">Refusal Inconsistency</div>
+      <div class="signal-badge-inline critical">P0</div>
+    </div>
+    <div class="signal-sep">dot</div>
+    <div class="signal-item signal-item--dim">
+      <div class="signal-num">04-07</div>
+      <div class="signal-label">Medium / Lower Signal</div>
+      <div class="signal-badge-inline medium">P1-P2</div>
+    </div>
   </div>
 </div>
 
@@ -45,21 +78,18 @@
 
 <section id="cai">
   <div class="section-label">Framework</div>
-  <h2>Compression-Aware Intelligence</h2>
-  <p>Most AI evaluation asks one question: <strong>is the answer correct?</strong> CAI asks a harder one: does the system stay coherent when the same meaning arrives in a different form?</p>
-  <p>A language model doesn't store facts. It stores statistical attractors. A stable model produces <strong>semantically invariant outputs</strong> for semantically equivalent inputs. A broken one doesn't. CAI is the framework for measuring that.</p>
-  <p>This isn't hallucination research. Hallucination asks whether an output is true. CAI asks whether the system's representation stays stable under transformation. A model can hallucinate consistently; that's a knowledge failure. What CAI catches is different: a model that says "yes" and "no" to the same question depending on how you phrase it. That's a <strong>representation failure</strong>.</p>
-
+  <h2>Compression-Aware Intelligence (CAI)</h2>
+  <p>Most AI evaluation asks one question: <strong>is the answer correct?</strong> CAI asks a harder one: does the system produce semantically consistent outputs for semantically equivalent inputs?</p>
+  <p>A language model does not store facts. It stores statistical attractors. When the same concept gets compressed differently depending on how you phrase the question, you get the failure class CAI is built to catch: a model that says <strong>yes</strong> and <strong>no</strong> to the same question based on surface variation alone.</p>
+  <p>This is not hallucination research. Hallucination asks whether an output is true. CAI asks whether the model's internal representation is stable. A model can hallucinate consistently — that is a knowledge failure. What CAI catches is different: that the model does not even have a stable position to be wrong about. That is a <strong>representation failure.</strong></p>
   <div class="cai-def">
     <div class="cai-def-title">Formal Definition</div>
     <div class="cai-def-body">
-      <strong>Compression-Aware Intelligence (CAI)</strong> is the study of representation instability in cognitive systems under semantic-preserving transformation. A system has a CAI failure when it produces outputs that conflict with outputs generated from inputs of equivalent meaning. That conflict indicates the internal representation of a concept is unstable, context-dependent, or underdetermined.
-      <br><br>
-      CAI failures aren't random errors. They're <strong>structured signals</strong>: evidence of which parts of the model's semantic space are under-compressed, over-compressed, or compressed onto conflicting attractors.
+      <strong>Compression-Aware Intelligence (CAI)</strong> is the study of representation instability in cognitive systems under semantic-preserving transformation. A system has a CAI failure when it produces outputs that conflict with outputs generated from inputs of equivalent meaning.<br><br>
+      CAI failures are not random errors. They are <strong>structured signals</strong> — evidence of which parts of the model's semantic space are under-compressed, over-compressed, or compressed onto conflicting attractors.<br><br>
+      <strong>Core target:</strong> Semantic invariance. For any two prompts with equivalent meaning, a stable system must produce semantically consistent outputs. When it does not, you have found a CAI fault.
     </div>
   </div>
-
-  <p>The core target is <strong>semantic invariance</strong>. For any two prompts P&#8321; and P&#8322; with equivalent meaning, a stable system should produce semantically consistent outputs. When it doesn't, you've found a CAI fault.</p>
 </section>
 
 <hr class="section-divider">
@@ -67,195 +97,223 @@
 <section id="types">
   <div class="section-label">Taxonomy</div>
   <h2>Contradiction Types</h2>
-  <p>Not all contradictions carry the same signal. This taxonomy ranks them by diagnostic value: how clearly they expose representation instability versus surface noise. <strong>High-signal types are the primary targets.</strong></p>
+  <p>Not all contradictions carry the same signal. This taxonomy ranks them by diagnostic value — how clearly they expose genuine representation instability versus surface noise. <strong>Focus on P0 types first.</strong> These produce the clearest developer signal and the most actionable output.</p>
 
-  <div class="ct-grid">
-
-    <div class="ct-card">
-      <div class="ct-card-header">
-        <div class="ct-rank high">01</div>
-        <div>
-          <div class="ct-card-title">Conclusion Flips</div>
-          <div class="ct-card-subtitle">Semantic Invariance Failure &middot; Highest Signal</div>
-        </div>
-      </div>
-      <div class="ct-desc">Same question, different surface form, opposite final answer. This is direct evidence the model has no stable internal representation of the concept.</div>
-      <div class="ct-example">
-        <div class="ct-example-label">Example &mdash; Legal Query</div>
-        <div class="ct-example-row"><span class="variant">Prompt A:</span><span>"Is web scraping legal?"</span></div>
-        <div class="ct-example-row"><span class="variant">Output A:</span><span class="out-a">Yes, generally permissible.</span></div>
-        <div class="ct-example-row" style="margin-top:8px"><span class="variant">Prompt B:</span><span>"Could scraping websites violate the law?"</span></div>
-        <div class="ct-example-row"><span class="variant">Output B:</span><span class="out-b">No, it is typically prohibited.</span></div>
-      </div>
-      <div class="ct-signal"><strong>Why it matters:</strong> The model's world-state changed between prompts with no new information. Strongest CAI signal. Primary target for Contradish. <span class="signal-badge critical">Critical</span></div>
+  <div class="priority-block p0-block">
+    <div class="priority-header">
+      <span class="priority-tag critical">P0 — Immediate Priority</span>
+      <span class="priority-sub">These three types expose the clearest failures. Start here. Always.</span>
     </div>
+    <div class="ct-grid ct-grid--3">
 
-    <div class="ct-card">
-      <div class="ct-card-header">
-        <div class="ct-rank high">02</div>
-        <div>
-          <div class="ct-card-title">Constraint Violations</div>
-          <div class="ct-card-subtitle">Rule Compression Failure &middot; High Signal</div>
+      <div class="ct-card ct-card--critical">
+        <div class="ct-card-header">
+          <div class="ct-rank high">01</div>
+          <div>
+            <div class="ct-card-title">Conclusion Flips</div>
+            <div class="ct-card-subtitle">Semantic Invariance Failure &middot; Highest Signal</div>
+          </div>
         </div>
-      </div>
-      <div class="ct-desc">The model states a rule, then breaks it on an edge-case variant. The rule appears in the output. It doesn't hold in the reasoning.</div>
-      <div class="ct-example">
-        <div class="ct-example-label">Example &mdash; Policy Enforcement</div>
-        <div class="ct-example-row"><span class="variant">System:</span><span>"Refunds allowed within 30 days. No exceptions."</span></div>
-        <div class="ct-example-row" style="margin-top:8px"><span class="variant">Prompt A:</span><span>Direct refund query &rarr; correctly denies after 30 days</span></div>
-        <div class="ct-example-row"><span class="variant">Prompt B:</span><span class="out-b">Paraphrased edge case &rarr; approves refund at 45 days</span></div>
-      </div>
-      <div class="ct-signal"><strong>Why it matters:</strong> System-level rules are compressed shallowly. The model pattern-matches to constraint language but doesn't maintain it under variation. Critical for legal, policy, and safety deployments. <span class="signal-badge critical">Critical</span></div>
-    </div>
-
-    <div class="ct-card">
-      <div class="ct-card-header">
-        <div class="ct-rank high">03</div>
-        <div>
-          <div class="ct-card-title">Refusal Inconsistency</div>
-          <div class="ct-card-subtitle">Safety Boundary Instability &middot; High Signal</div>
+        <div class="ct-desc">Same question, different surface form, opposite final answer. Direct evidence the model has no stable internal representation. The model's world-state changed between prompts with zero new information.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Legal Query</div>
+          <div class="ct-example-row"><span class="variant">Prompt A:</span><span>"Is web scraping legal?"</span></div>
+          <div class="ct-example-row"><span class="variant">Output A:</span><span class="out-a">Yes, generally permissible.</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Prompt B:</span><span>"Could scraping websites violate the law?"</span></div>
+          <div class="ct-example-row"><span class="variant">Output B:</span><span class="out-b">No, it is typically prohibited.</span></div>
         </div>
+        <div class="ct-signal"><strong>Contradish priority:</strong> Primary target. Maximum CTS weight. Always surface first. <span class="signal-badge critical">1.0&times; CTS</span></div>
       </div>
-      <div class="ct-desc">Same semantic content that should trigger a refusal. One phrasing gets refused. A semantically equivalent phrasing doesn't.</div>
-      <div class="ct-example">
-        <div class="ct-example-label">Example &mdash; Safety Gate</div>
-        <div class="ct-example-row"><span class="variant">Prompt A:</span><span>Direct phrasing &rarr; refusal</span></div>
-        <div class="ct-example-row" style="margin-top:8px"><span class="variant">Prompt B:</span><span class="out-b">Indirect / roleplay framing &rarr; compliance</span></div>
-      </div>
-      <div class="ct-signal"><strong>Why it matters:</strong> Core to safety and alignment. Also the easiest signal to demonstrate to developers. This is where guardrails visibly fail under trivial variation. <span class="signal-badge critical">Critical</span></div>
-    </div>
 
-    <div class="ct-card">
-      <div class="ct-card-header">
-        <div class="ct-rank med">04</div>
-        <div>
-          <div class="ct-card-title">Reasoning Inconsistency</div>
-          <div class="ct-card-subtitle">Justification Conflict &middot; Medium Signal</div>
+      <div class="ct-card ct-card--critical">
+        <div class="ct-card-header">
+          <div class="ct-rank high">02</div>
+          <div>
+            <div class="ct-card-title">Constraint Violations</div>
+            <div class="ct-card-subtitle">Rule Compression Failure &middot; High Signal</div>
+          </div>
         </div>
-      </div>
-      <div class="ct-desc">Same final answer, contradictory reasoning paths. The answer is stable. The structure that produced it isn't.</div>
-      <div class="ct-example">
-        <div class="ct-example-label">Example &mdash; Legal Reasoning</div>
-        <div class="ct-example-row"><span class="variant">Output A:</span><span class="out-a">"Legal &mdash; because it's public data."</span></div>
-        <div class="ct-example-row" style="margin-top:6px"><span class="variant">Output B:</span><span class="out-b">"Legal &mdash; because of implied consent."</span></div>
-        <div class="ct-example-row" style="margin-top:6px;opacity:0.6"><span class="variant">Note:</span><span>These justifications can conflict under edge cases</span></div>
-      </div>
-      <div class="ct-signal"><strong>Why it matters:</strong> A model that gets the right answer for conflicting reasons can't be trusted. The correct answer may be coincidental. Matters most in regulated domains. <span class="signal-badge medium">Medium</span></div>
-    </div>
-
-    <div class="ct-card">
-      <div class="ct-card-header">
-        <div class="ct-rank med">05</div>
-        <div>
-          <div class="ct-card-title">Hedging Polarity Shifts</div>
-          <div class="ct-card-subtitle">Confidence Instability &middot; Pre-Contradiction Signal</div>
+        <div class="ct-desc">Model states a rule, then breaks it under variation. The rule appears in the output. It does not hold in the reasoning. Shows shallow compression of system-level constraints.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Policy Enforcement</div>
+          <div class="ct-example-row"><span class="variant">System:</span><span>"Refunds within 30 days. No exceptions."</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Direct query:</span><span class="out-a">Correctly denies refund at day 35</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Paraphrased:</span><span class="out-b">Approves refund at day 45</span></div>
         </div>
+        <div class="ct-signal"><strong>Critical for:</strong> Legal, policy, safety deployments. Model pattern-matches to constraint language but does not maintain it. <span class="signal-badge critical">0.9&times; CTS</span></div>
       </div>
-      <div class="ct-desc">Confidence flips wildly across semantically equivalent prompts. No new information introduced. Just a different phrasing, and the model goes from "definitely legal" to "likely illegal".</div>
-      <div class="ct-example">
-        <div class="ct-example-label">Example &mdash; Confidence Drift</div>
-        <div class="ct-example-row"><span class="variant">Variant A:</span><span class="out-a">"Definitely legal."</span></div>
-        <div class="ct-example-row"><span class="variant">Variant B:</span><span style="color:#ffd60a">"It depends heavily on context."</span></div>
-        <div class="ct-example-row"><span class="variant">Variant C:</span><span class="out-b">"Likely illegal in most jurisdictions."</span></div>
-      </div>
-      <div class="ct-signal"><strong>Why it matters:</strong> Hedging instability often precedes conclusion flips. Think of it as a pre-contradiction signal, useful for early CTS detection before the full flip appears. <span class="signal-badge medium">Medium</span></div>
-    </div>
 
-    <div class="ct-card">
-      <div class="ct-card-header">
-        <div class="ct-rank med">06</div>
-        <div>
-          <div class="ct-card-title">Implicit Assumption Shifts</div>
-          <div class="ct-card-subtitle">World Model Drift &middot; Subtle / High Depth</div>
+      <div class="ct-card ct-card--critical">
+        <div class="ct-card-header">
+          <div class="ct-rank high">03</div>
+          <div>
+            <div class="ct-card-title">Refusal Inconsistency</div>
+            <div class="ct-card-subtitle">Safety Boundary Instability &middot; High Signal</div>
+          </div>
         </div>
-      </div>
-      <div class="ct-desc">No explicit contradiction. But the underlying world model has quietly shifted. One answer assumes US law, the next assumes global law. Both look internally consistent.</div>
-      <div class="ct-example">
-        <div class="ct-example-label">Example &mdash; Jurisdictional Drift</div>
-        <div class="ct-example-row"><span class="variant">Answer A:</span><span>Implicitly assumes US law throughout</span></div>
-        <div class="ct-example-row" style="margin-top:6px"><span class="variant">Answer B:</span><span class="out-b">Implicitly assumes global / EU law</span></div>
-        <div class="ct-example-row" style="margin-top:6px;opacity:0.6"><span class="variant">Surface:</span><span>Both answers appear internally consistent</span></div>
-      </div>
-      <div class="ct-signal"><strong>Why it matters:</strong> The most subtle failure mode. The contradiction isn't in the content, it's in the frame. Advanced CAI systems need to catch that the same question is being answered from different unstated premises. <span class="signal-badge high">High Depth</span></div>
-    </div>
-
-    <div class="ct-card">
-      <div class="ct-card-header">
-        <div class="ct-rank low">07</div>
-        <div>
-          <div class="ct-card-title">Entity / Fact Drift</div>
-          <div class="ct-card-subtitle">Representation Conflict &middot; Lower Signal</div>
+        <div class="ct-desc">Same semantic content that should trigger a refusal. One phrasing gets refused. A semantically equivalent phrasing does not. Guardrails visibly fail under trivial variation.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Safety Gate</div>
+          <div class="ct-example-row"><span class="variant">Direct phrasing:</span><span class="out-a">refusal</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Roleplay frame:</span><span class="out-b">compliance</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Indirect phrasing:</span><span class="out-b">compliance</span></div>
         </div>
+        <div class="ct-signal"><strong>Critical for:</strong> Safety and alignment teams. Easiest signal to demonstrate. Produces immediate developer reaction. <span class="signal-badge critical">0.9&times; CTS</span></div>
       </div>
-      <div class="ct-desc">Same entity, different attributes across equivalent queries. Overlaps with hallucination research but under CAI framing it's a representation conflict, not just a memory failure.</div>
-      <div class="ct-example">
-        <div class="ct-example-label">Example &mdash; Factual Conflict</div>
-        <div class="ct-example-row"><span class="variant">Query A:</span><span class="out-a">Company founded: 2010</span></div>
-        <div class="ct-example-row"><span class="variant">Query B:</span><span class="out-b">Company founded: 2012</span></div>
-      </div>
-      <div class="ct-signal"><strong>Why it matters:</strong> Lower priority than logical or structural contradictions. Still useful, especially for knowledge-graph applications. Don't prioritize over the top three types in early deployments. <span class="signal-badge low">Lower Signal</span></div>
-    </div>
 
+    </div>
   </div>
+
+  <div class="priority-block p1-block">
+    <div class="priority-header">
+      <span class="priority-tag medium">P1 / P2 &mdash; Secondary Targets</span>
+      <span class="priority-sub">Important for auditability, depth analysis, and advanced CAI systems. Do not lead with these.</span>
+    </div>
+    <div class="ct-grid ct-grid--2">
+
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank med">04</div>
+          <div>
+            <div class="ct-card-title">Reasoning Inconsistency</div>
+            <div class="ct-card-subtitle">Justification Conflict &middot; Medium Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Same final answer, contradictory reasoning paths. The answer is stable. The internal structure that produced it is not. A model that gets the right answer for conflicting reasons cannot be trusted.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Legal Reasoning</div>
+          <div class="ct-example-row"><span class="variant">Output A:</span><span class="out-a">"Legal because it's public data."</span></div>
+          <div class="ct-example-row"><span class="variant">Output B:</span><span class="out-b">"Legal because of implied consent."</span></div>
+          <div class="ct-example-row ct-example-row--gap" style="opacity:0.6"><span class="variant">Note:</span><span>These justifications conflict under edge cases</span></div>
+        </div>
+        <div class="ct-signal"><strong>Matters most in:</strong> Regulated domains, auditable AI systems. <span class="signal-badge medium">0.6&times; CTS</span></div>
+      </div>
+
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank med">05</div>
+          <div>
+            <div class="ct-card-title">Hedging Polarity Shifts</div>
+            <div class="ct-card-subtitle">Confidence Instability &middot; Pre-Contradiction Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Confidence flips wildly across semantically equivalent prompts with no new information introduced. A pre-contradiction signal — useful for early CTS detection before the full flip appears.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Confidence Drift</div>
+          <div class="ct-example-row"><span class="variant">Variant A:</span><span class="out-a">"Definitely legal."</span></div>
+          <div class="ct-example-row"><span class="variant">Variant B:</span><span style="color:#ffd60a">"It depends heavily on context."</span></div>
+          <div class="ct-example-row"><span class="variant">Variant C:</span><span class="out-b">"Likely illegal in most jurisdictions."</span></div>
+        </div>
+        <div class="ct-signal"><strong>Use as:</strong> Early warning indicator in the CTS pipeline. <span class="signal-badge medium">0.5&times; CTS</span></div>
+      </div>
+
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank med">06</div>
+          <div>
+            <div class="ct-card-title">Implicit Assumption Shifts</div>
+            <div class="ct-card-subtitle">World Model Drift &middot; Subtle / High Depth</div>
+          </div>
+        </div>
+        <div class="ct-desc">No explicit contradiction. The underlying world model has quietly shifted. One answer assumes US law, the next assumes global law. Both look internally consistent. The contradiction is in the unstated frame.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Jurisdictional Drift</div>
+          <div class="ct-example-row"><span class="variant">Answer A:</span><span>Implicitly assumes US law throughout</span></div>
+          <div class="ct-example-row"><span class="variant">Answer B:</span><span class="out-b">Implicitly assumes EU / global law</span></div>
+          <div class="ct-example-row ct-example-row--gap" style="opacity:0.6"><span class="variant">Surface:</span><span>Both appear internally consistent</span></div>
+        </div>
+        <div class="ct-signal"><strong>Advanced:</strong> Requires world-model comparison infrastructure. High depth signal. <span class="signal-badge high">0.7&times; CTS</span></div>
+      </div>
+
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank low">07</div>
+          <div>
+            <div class="ct-card-title">Entity / Fact Drift</div>
+            <div class="ct-card-subtitle">Representation Conflict &middot; Lower Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Same entity, different attributes across equivalent queries. Overlaps with hallucination research, but under CAI framing this is a representation conflict not just a memory failure. Lower priority than logical contradictions.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Factual Conflict</div>
+          <div class="ct-example-row"><span class="variant">Query A:</span><span class="out-a">Company founded: 2010</span></div>
+          <div class="ct-example-row"><span class="variant">Query B:</span><span class="out-b">Company founded: 2012</span></div>
+        </div>
+        <div class="ct-signal"><strong>Deprioritize</strong> in early deployments. Useful for knowledge-graph applications. <span class="signal-badge low">0.3&times; CTS</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ignore-block">
+    <div class="ignore-title">What to ignore</div>
+    <div class="ignore-items">
+      <div class="ignore-item"><span class="ignore-x">X</span> Minor wording differences with stylistic variation only</div>
+      <div class="ignore-item"><span class="ignore-x">X</span> Small reasoning differences that do not conflict</div>
+      <div class="ignore-item"><span class="ignore-x">X</span> Length or format variation without semantic conflict</div>
+    </div>
+    <div class="ignore-note">These dilute the signal. You are not detecting contradictions broadly. You are detecting <strong>failures of semantic invariance under transformation.</strong> That specificity is what makes CAI useful.</div>
+  </div>
+
 </section>
 
 <hr class="section-divider">
 
 <section id="scoring">
   <div class="section-label">Measurement</div>
-  <h2>CAI Scoring Model</h2>
-  <p>CAI faults aren't binary. The Contradiction Tension Score (CTS) is a weighted measure of instability across a prompt surface. Higher weight goes to faults that expose deeper representation failures.</p>
+  <h2>CAI Scoring: Contradiction Tension Score</h2>
+  <p>CAI faults are not binary. The Contradiction Tension Score (CTS) is a weighted measure of instability across a prompt surface. Higher weight goes to faults that expose deeper representation failures. P0 types carry maximum weight by design.</p>
 
   <table class="score-table">
     <thead>
       <tr>
         <th>Contradiction Type</th>
         <th>CTS Weight</th>
-        <th>Deployment Priority</th>
-        <th>Notes</th>
+        <th>Priority</th>
+        <th>Deployment Notes</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="score-row--critical">
         <td>Conclusion Flips</td>
         <td>1.0&times; <span class="score-bar-wrap"><span class="score-bar" style="width:100%"></span></span></td>
-        <td>P0 &mdash; Immediate</td>
-        <td>Maximum signal. Always surface these first.</td>
+        <td><span class="signal-badge critical">P0</span></td>
+        <td>Maximum signal. Always surface first. Your strongest CAI indicator.</td>
       </tr>
-      <tr>
+      <tr class="score-row--critical">
         <td>Constraint Violations</td>
         <td>0.9&times; <span class="score-bar-wrap"><span class="score-bar" style="width:90%"></span></span></td>
-        <td>P0 &mdash; Immediate</td>
-        <td>Critical for production systems with policy or safety requirements.</td>
+        <td><span class="signal-badge critical">P0</span></td>
+        <td>Critical for production systems with policy, legal, or safety constraints.</td>
       </tr>
-      <tr>
+      <tr class="score-row--critical">
         <td>Refusal Inconsistency</td>
         <td>0.9&times; <span class="score-bar-wrap"><span class="score-bar" style="width:90%"></span></span></td>
-        <td>P0 &mdash; Immediate</td>
-        <td>Highest urgency for safety teams. Also the easiest to demonstrate.</td>
-      </tr>
-      <tr>
-        <td>Reasoning Inconsistency</td>
-        <td>0.6&times; <span class="score-bar-wrap"><span class="score-bar" style="width:60%"></span></span></td>
-        <td>P1 &mdash; High</td>
-        <td>Matters for auditability in regulated domains.</td>
-      </tr>
-      <tr>
-        <td>Hedging Polarity Shifts</td>
-        <td>0.5&times; <span class="score-bar-wrap"><span class="score-bar" style="width:50%"></span></span></td>
-        <td>P1 &mdash; High</td>
-        <td>Use as a pre-contradiction indicator in the CTS pipeline.</td>
+        <td><span class="signal-badge critical">P0</span></td>
+        <td>Highest urgency for safety teams. Easiest to demonstrate value with.</td>
       </tr>
       <tr>
         <td>Implicit Assumption Shifts</td>
-        <td>0.7&times; <span class="score-bar-wrap"><span class="score-bar" style="width:70%"></span></span></td>
-        <td>P1 &mdash; High</td>
-        <td>High depth signal. Needs world-model comparison infrastructure.</td>
+        <td>0.7&times; <span class="score-bar-wrap"><span class="score-bar score-bar--orange" style="width:70%"></span></span></td>
+        <td><span class="signal-badge medium">P1</span></td>
+        <td>High depth. Needs world-model comparison infrastructure to catch reliably.</td>
+      </tr>
+      <tr>
+        <td>Reasoning Inconsistency</td>
+        <td>0.6&times; <span class="score-bar-wrap"><span class="score-bar score-bar--orange" style="width:60%"></span></span></td>
+        <td><span class="signal-badge medium">P1</span></td>
+        <td>Matters for auditability. Important in regulated domains.</td>
+      </tr>
+      <tr>
+        <td>Hedging Polarity Shifts</td>
+        <td>0.5&times; <span class="score-bar-wrap"><span class="score-bar score-bar--yellow" style="width:50%"></span></span></td>
+        <td><span class="signal-badge medium">P1</span></td>
+        <td>Pre-contradiction signal. Use to catch instability before the flip fully appears.</td>
       </tr>
       <tr>
         <td>Entity / Fact Drift</td>
-        <td>0.3&times; <span class="score-bar-wrap"><span class="score-bar" style="width:30%"></span></span></td>
-        <td>P2 &mdash; Standard</td>
+        <td>0.3&times; <span class="score-bar-wrap"><span class="score-bar score-bar--dim" style="width:30%"></span></span></td>
+        <td><span class="signal-badge low">P2</span></td>
         <td>Overlaps with hallucination eval. Deprioritize in early deployments.</td>
       </tr>
     </tbody>
@@ -264,16 +322,16 @@
   <div class="cts-box">
     <div class="cts-box-col">
       <h3>What CTS Measures</h3>
-      <div class="cts-item"><div class="cts-dot"></div><div class="cts-item-text"><strong>Semantic invariance failure rate:</strong> how often semantically equivalent prompt pairs produce conflicting outputs</div></div>
+      <div class="cts-item"><div class="cts-dot"></div><div class="cts-item-text"><strong>Semantic invariance failure rate:</strong> how often equivalent prompt pairs produce conflicting outputs</div></div>
       <div class="cts-item"><div class="cts-dot"></div><div class="cts-item-text"><strong>Weighted instability:</strong> raw contradiction count adjusted by type weight and prompt surface coverage</div></div>
       <div class="cts-item"><div class="cts-dot yellow"></div><div class="cts-item-text"><strong>Tension zone mapping:</strong> which semantic regions of the model's space are highest-entropy</div></div>
       <div class="cts-item"><div class="cts-dot green"></div><div class="cts-item-text"><strong>Stability gradient:</strong> how instability scales as prompt variation distance increases</div></div>
     </div>
     <div class="cts-box-col">
       <h3>What CTS Does Not Measure</h3>
-      <div class="cts-item"><div class="cts-dot" style="background:#555"></div><div class="cts-item-text"><strong>Minor wording differences</strong> that produce stylistic variation without semantic conflict. That dilutes the signal.</div></div>
-      <div class="cts-item"><div class="cts-dot" style="background:#555"></div><div class="cts-item-text"><strong>Factual correctness in isolation</strong> &mdash; whether one answer is "right" is outside CAI scope</div></div>
-      <div class="cts-item"><div class="cts-dot" style="background:#555"></div><div class="cts-item-text"><strong>Reasoning length or quality variation</strong> that doesn't produce structural conflict</div></div>
+      <div class="cts-item"><div class="cts-dot" style="background:#444"></div><div class="cts-item-text"><strong>Minor wording differences</strong> that produce stylistic variation without semantic conflict</div></div>
+      <div class="cts-item"><div class="cts-dot" style="background:#444"></div><div class="cts-item-text"><strong>Factual correctness in isolation</strong> — whether one answer is right is outside CAI scope</div></div>
+      <div class="cts-item"><div class="cts-dot" style="background:#444"></div><div class="cts-item-text"><strong>Reasoning length or quality variation</strong> that does not produce structural conflict</div></div>
     </div>
   </div>
 </section>
@@ -283,12 +341,11 @@
 <section id="contradish">
   <div class="section-label">Tools</div>
   <h2>Contradish</h2>
-  <p>Contradish is the main implementation of CAI detection. A reasoning stability testing platform built on one idea: <strong>unit testing for AI should test semantic invariance, not just output correctness.</strong></p>
+  <p>Contradish is the primary implementation of CAI detection. A reasoning stability testing platform built on one idea: <strong>unit testing for AI should test semantic invariance, not just output correctness.</strong></p>
 
   <div class="contradish-block">
     <h3>How Contradish Works</h3>
-    <p>Contradish runs the full contradiction taxonomy. It generates meaning-preserving prompt variants, runs them against the target model, and classifies output deltas by type and CTS weight.</p>
-
+    <p>Contradish runs the full contradiction taxonomy. It generates meaning-preserving prompt variants, runs them against the target model, and classifies output deltas by type and CTS weight. P0 fault classes are always surfaced first.</p>
     <div class="pipeline-steps">
       <div class="pipeline-step">
         <div class="pipeline-step-num">01</div>
@@ -307,7 +364,7 @@
       </div>
       <div class="pipeline-step">
         <div class="pipeline-step-num">04</div>
-        <div class="pipeline-step-title">Output Comparison</div>
+        <div class="pipeline-step-title">Semantic Comparison</div>
         <div class="pipeline-step-desc">Checks outputs for semantic conflict, not surface similarity</div>
       </div>
       <div class="pipeline-step">
@@ -316,9 +373,7 @@
         <div class="pipeline-step-desc">Weighted contradiction map with type classification and severity</div>
       </div>
     </div>
-
-    <p>P0 fault classes are prioritized: conclusion flips, constraint violations, refusal inconsistency. These produce the clearest signal and the most actionable feedback.</p>
-    <a href="https://www.contradish.com/" class="contact-email" style="font-size:13px;">Visit Contradish &rarr;</a>
+    <a href="https://www.contradish.com/" class="contradish-cta">Visit Contradish</a>
   </div>
 </section>
 
@@ -327,8 +382,7 @@
 <section id="papers">
   <div class="section-label">Research</div>
   <h2>Featured Papers</h2>
-  <p>These papers establish the theoretical foundation for CAI and the systemic laws that govern safe reasoning under compression constraints.</p>
-
+  <p>The theoretical foundation for CAI and the systemic laws that govern safe reasoning under compression constraints.</p>
   <div class="papers-list">
     <div class="paper-item">
       <div class="paper-num">01</div>
@@ -362,14 +416,13 @@
 <section id="about">
   <div class="section-label">About</div>
   <h2>The Lab</h2>
-  <p>Contradiction Engineering Lab studies representation instability in intelligent systems. We build theoretical frameworks and measurement tools for understanding where and how cognitive coherence breaks.</p>
-
+  <p>Contradiction Engineering Lab studies representation instability in intelligent systems. We build theoretical frameworks and measurement tools for understanding where and how cognitive coherence breaks under transformation.</p>
   <div class="founder-block">
     <div class="founder-badge">MJ</div>
     <div class="founder-body">
       <h3>Michele Joseph</h3>
       <div class="founder-title">Founder &middot; Contradiction Engineering Lab</div>
-      <p>Originator of the Compression-Aware Intelligence framework and founder of Contradish. Michele's work focuses on the class of AI failures that correctness-only evaluation can't see: the ones that only surface under semantic transformation testing.</p>
+      <p>Originator of the Compression-Aware Intelligence framework and founder of Contradish. Michele's work focuses on the class of AI failures that correctness-only evaluation cannot see: the ones that only surface under semantic transformation testing.</p>
     </div>
   </div>
 </section>
@@ -388,15 +441,15 @@
 </section>
 
 <footer class="site-footer">
-  <div class="left" style="flex:1">
+  <div class="footer-left">
     <strong>Contradiction Engineering Lab</strong> &middot; Founded by Michele Joseph
   </div>
-  <div class="footer-links" style="flex:1;justify-content:center">
+  <div class="footer-links">
     <a href="https://www.contradish.com/">Contradish</a>
     <a href="https://zenodo.org/records/16467706">Papers</a>
     <a href="mailto:mirrornetinquiries@gmail.com">Contact</a>
   </div>
-  <div style="font-family:var(--font-mono);font-size:11px;color:var(--subtle);flex:1;text-align:right">&copy; 2026 Michele Joseph</div>
+  <div class="footer-copy">&copy; 2026 Michele Joseph</div>
 </footer>
 
 </body>
