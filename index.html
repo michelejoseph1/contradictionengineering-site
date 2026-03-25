@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contradiction Engineering Lab</title>
-<meta name="description" content="Contradiction Engineering Lab studies semantic invariance, representation instability, and measurement methods for AI systems. Learn about CAI, contradiction taxonomy, and Contradish." />
-<meta name="keywords" content="Contradiction Engineering, Compression-Aware Intelligence, CAI, Contradish, semantic invariance, AI evaluation, representation instability" />
+<title>Contradiction Engineering — Semantic Invariance Testing for AI</title>
+<meta name="description" content="Contradiction Engineering Lab: framework and tools for detecting representation instability in AI systems. Catch the failures correctness-only evaluation misses." />
+<meta name="keywords" content="Contradiction Engineering, Compression-Aware Intelligence, CAI, Contradish, semantic invariance, AI reliability, representation instability" />
 <meta name="author" content="Michele Joseph" />
 <link rel="canonical" href="https://www.contradictionengineering.com/" />
-<meta property="og:title" content="Contradiction Engineering Lab" />
-<meta property="og:description" content="Research and tools for measuring semantic consistency in AI systems." />
+<meta property="og:title" content="Contradiction Engineering — Semantic Invariance Testing for AI" />
+<meta property="og:description" content="Same meaning in. Different world out. That gap is where AI breaks." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.contradictionengineering.com/" />
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -18,195 +18,438 @@
 </head>
 <body>
 
-<a class="skip-link" href="#content">Skip to content</a>
-
 <header class="site-header">
-  <a class="site-logo" href="#top">Contradiction Engineering Lab</a>
-  <nav class="site-nav" aria-label="Primary">
-    <a href="#about">About</a>
+  <div class="site-logo"><span>//</span> Contradiction Engineering</div>
+  <nav class="site-nav">
     <a href="#cai">CAI</a>
-    <a href="#taxonomy">Taxonomy</a>
+    <a href="#types">Taxonomy</a>
+    <a href="#scoring">CTS</a>
     <a href="#contradish">Contradish</a>
-    <a href="#research">Research</a>
+    <a href="#papers">Research</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
-<main id="content">
-  <section class="hero" id="top">
-    <p class="eyebrow">Research Lab</p>
-    <div class="hero-grid">
-      <div>
-        <h1>Studying when AI systems stop meaning the same thing.</h1>
-        <p class="hero-lede">Contradiction Engineering Lab studies semantic invariance in intelligent systems. Our work focuses on a simple question: if two prompts mean the same thing, does the model respond in a semantically consistent way?</p>
-        <p class="hero-copy">That question points to a class of failures that standard correctness checks often miss. A model can appear strong on benchmark accuracy while still changing its answer, its constraints, or its safety behavior when the wording changes but the meaning does not.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#contradish">See the tool</a>
-          <a class="button" href="#cai">Read the framework</a>
+<div class="hero">
+  <div class="hero-label">Compression-Aware Intelligence</div>
+  <h1>Same meaning in.<br><em>Different world out.</em></h1>
+  <p class="hero-sub">That gap is where AI breaks. Contradiction Engineering is the framework for finding it — systematically, before your users do.</p>
+  <div class="hero-axiom-row">
+    <div class="hero-axiom">
+      <span class="label">The Failure Class</span>
+      Not hallucination. Not accuracy. <strong>Representation instability under semantic-preserving transformation.</strong> Same question, different phrasing, contradictory answer. That is what CAI detects.
+    </div>
+    <div class="hero-axiom hero-axiom--right">
+      <span class="label">Why It's Invisible</span>
+      Standard eval asks: is the answer correct?<br>CAI asks: does the answer stay consistent when the question is rephrased?<br>Most evals never run the second test.
+    </div>
+  </div>
+</div>
+
+<div class="signal-bar">
+  <div class="signal-bar-inner">
+    <div class="signal-item">
+      <div class="signal-num">01</div>
+      <div class="signal-label">Conclusion Flips</div>
+      <div class="signal-badge-inline critical">P0</div>
+    </div>
+    <div class="signal-sep">to</div>
+    <div class="signal-item">
+      <div class="signal-num">02</div>
+      <div class="signal-label">Constraint Violations</div>
+      <div class="signal-badge-inline critical">P0</div>
+    </div>
+    <div class="signal-sep">to</div>
+    <div class="signal-item">
+      <div class="signal-num">03</div>
+      <div class="signal-label">Refusal Inconsistency</div>
+      <div class="signal-badge-inline critical">P0</div>
+    </div>
+    <div class="signal-sep">dot</div>
+    <div class="signal-item signal-item--dim">
+      <div class="signal-num">04-07</div>
+      <div class="signal-label">Medium / Lower Signal</div>
+      <div class="signal-badge-inline medium">P1-P2</div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<section id="cai">
+  <div class="section-label">Framework</div>
+  <h2>Compression-Aware Intelligence (CAI)</h2>
+  <p>Most AI evaluation asks one question: <strong>is the answer correct?</strong> CAI asks a harder one: does the system produce semantically consistent outputs for semantically equivalent inputs?</p>
+  <p>A language model does not store facts. It stores statistical attractors. When the same concept gets compressed differently depending on how you phrase the question, you get the failure class CAI is built to catch: a model that says <strong>yes</strong> and <strong>no</strong> to the same question based on surface variation alone.</p>
+  <p>This is not hallucination research. Hallucination asks whether an output is true. CAI asks whether the model's internal representation is stable. A model can hallucinate consistently — that is a knowledge failure. What CAI catches is different: that the model does not even have a stable position to be wrong about. That is a <strong>representation failure.</strong></p>
+  <div class="cai-def">
+    <div class="cai-def-title">Formal Definition</div>
+    <div class="cai-def-body">
+      <strong>Compression-Aware Intelligence (CAI)</strong> is the study of representation instability in cognitive systems under semantic-preserving transformation. A system has a CAI failure when it produces outputs that conflict with outputs generated from inputs of equivalent meaning.<br><br>
+      CAI failures are not random errors. They are <strong>structured signals</strong> — evidence of which parts of the model's semantic space are under-compressed, over-compressed, or compressed onto conflicting attractors.<br><br>
+      <strong>Core target:</strong> Semantic invariance. For any two prompts with equivalent meaning, a stable system must produce semantically consistent outputs. When it does not, you have found a CAI fault.
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="types">
+  <div class="section-label">Taxonomy</div>
+  <h2>Contradiction Types</h2>
+  <p>Not all contradictions carry the same signal. This taxonomy ranks them by diagnostic value — how clearly they expose genuine representation instability versus surface noise. <strong>Focus on P0 types first.</strong> These produce the clearest developer signal and the most actionable output.</p>
+
+  <div class="priority-block p0-block">
+    <div class="priority-header">
+      <span class="priority-tag critical">P0 — Immediate Priority</span>
+      <span class="priority-sub">These three types expose the clearest failures. Start here. Always.</span>
+    </div>
+    <div class="ct-grid ct-grid--3">
+
+      <div class="ct-card ct-card--critical">
+        <div class="ct-card-header">
+          <div class="ct-rank high">01</div>
+          <div>
+            <div class="ct-card-title">Conclusion Flips</div>
+            <div class="ct-card-subtitle">Semantic Invariance Failure &middot; Highest Signal</div>
+          </div>
         </div>
+        <div class="ct-desc">Same question, different surface form, opposite final answer. Direct evidence the model has no stable internal representation. The model's world-state changed between prompts with zero new information.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Legal Query</div>
+          <div class="ct-example-row"><span class="variant">Prompt A:</span><span>"Is web scraping legal?"</span></div>
+          <div class="ct-example-row"><span class="variant">Output A:</span><span class="out-a">Yes, generally permissible.</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Prompt B:</span><span>"Could scraping websites violate the law?"</span></div>
+          <div class="ct-example-row"><span class="variant">Output B:</span><span class="out-b">No, it is typically prohibited.</span></div>
+        </div>
+        <div class="ct-signal"><strong>Contradish priority:</strong> Primary target. Maximum CTS weight. Always surface first. <span class="signal-badge critical">1.0&times; CTS</span></div>
       </div>
-      <aside class="hero-panel" aria-label="Key points">
-        <p class="panel-label">Focus</p>
-        <ul class="panel-list">
-          <li>Semantic invariance testing for AI systems</li>
-          <li>Compression-Aware Intelligence as a measurement framework</li>
-          <li>Practical detection of contradiction and instability</li>
-          <li>Research tools for evaluation, auditing, and model analysis</li>
-        </ul>
-      </aside>
-    </div>
-  </section>
 
-  <section class="summary-strip" aria-label="Summary">
-    <div class="summary-card">
-      <h2>What this lab does</h2>
-      <p>We develop theory, terminology, and tools for measuring representation instability under semantic-preserving transformation.</p>
-    </div>
-    <div class="summary-card">
-      <h2>What CAI adds</h2>
-      <p>CAI shifts evaluation from isolated answer correctness toward consistency across equivalent inputs.</p>
-    </div>
-    <div class="summary-card">
-      <h2>What Contradish does</h2>
-      <p>Contradish generates prompt variants, compares outcomes, and surfaces contradiction patterns that matter in deployment.</p>
-    </div>
-  </section>
+      <div class="ct-card ct-card--critical">
+        <div class="ct-card-header">
+          <div class="ct-rank high">02</div>
+          <div>
+            <div class="ct-card-title">Constraint Violations</div>
+            <div class="ct-card-subtitle">Rule Compression Failure &middot; High Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Model states a rule, then breaks it under variation. The rule appears in the output. It does not hold in the reasoning. Shows shallow compression of system-level constraints.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Policy Enforcement</div>
+          <div class="ct-example-row"><span class="variant">System:</span><span>"Refunds within 30 days. No exceptions."</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Direct query:</span><span class="out-a">Correctly denies refund at day 35</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Paraphrased:</span><span class="out-b">Approves refund at day 45</span></div>
+        </div>
+        <div class="ct-signal"><strong>Critical for:</strong> Legal, policy, safety deployments. Model pattern-matches to constraint language but does not maintain it. <span class="signal-badge critical">0.9&times; CTS</span></div>
+      </div>
 
-  <section id="about">
-    <p class="section-label">About</p>
-    <h2>Purpose</h2>
-    <div class="content-grid">
-      <div>
-        <p>Contradiction Engineering Lab exists to study semantic consistency in AI systems. The central concern is not only whether a single answer is correct, but whether a system preserves its position when the input meaning stays fixed.</p>
-        <p>This matters because many production failures do not begin as obvious factual errors. They begin as instability. A system gives one answer to one form of a question and a conflicting answer to another. That behavior can affect legal guidance, safety refusals, policy enforcement, and any workflow that depends on stable reasoning.</p>
+      <div class="ct-card ct-card--critical">
+        <div class="ct-card-header">
+          <div class="ct-rank high">03</div>
+          <div>
+            <div class="ct-card-title">Refusal Inconsistency</div>
+            <div class="ct-card-subtitle">Safety Boundary Instability &middot; High Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Same semantic content that should trigger a refusal. One phrasing gets refused. A semantically equivalent phrasing does not. Guardrails visibly fail under trivial variation.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Safety Gate</div>
+          <div class="ct-example-row"><span class="variant">Direct phrasing:</span><span class="out-a">refusal</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Roleplay frame:</span><span class="out-b">compliance</span></div>
+          <div class="ct-example-row ct-example-row--gap"><span class="variant">Indirect phrasing:</span><span class="out-b">compliance</span></div>
+        </div>
+        <div class="ct-signal"><strong>Critical for:</strong> Safety and alignment teams. Easiest signal to demonstrate. Produces immediate developer reaction. <span class="signal-badge critical">0.9&times; CTS</span></div>
       </div>
-      <div class="callout">
-        <h3>Working definition</h3>
-        <p>Contradiction engineering is the study of methods for detecting, classifying, and measuring semantic inconsistency in AI outputs under meaning-preserving prompt variation.</p>
-      </div>
-    </div>
-  </section>
 
-  <section id="cai">
-    <p class="section-label">Framework</p>
-    <h2>Compression-Aware Intelligence</h2>
-    <p class="section-intro">Compression-Aware Intelligence, or CAI, is the framework used by the lab to reason about instability, contradiction, and strain in cognitive systems.</p>
-    <div class="two-column">
-      <div class="card">
-        <h3>Core idea</h3>
-        <p>Every useful system compresses. Language models compress training distributions into parameters. Retrieval systems compress large corpora into ranked selections. Summaries compress documents into shorter forms. CAI studies what happens when that compression no longer preserves meaning reliably.</p>
-      </div>
-      <div class="card">
-        <h3>Why it matters</h3>
-        <p>When equivalent prompts produce conflicting outputs, the issue is not just truth or falsehood. It is evidence that the underlying representation is unstable. CAI treats that instability as a measurable signal rather than an anecdotal error.</p>
-      </div>
     </div>
-    <div class="formula-card">
-      <p class="formula-label">CAI sequence</p>
-      <p class="formula">compression loss -> contradiction -> compression strain -> instability</p>
-      <p class="formula-note">This sequence frames contradiction as an observable sign of failure pressure inside the system.</p>
-    </div>
-  </section>
+  </div>
 
-  <section id="taxonomy">
-    <p class="section-label">Taxonomy</p>
-    <h2>Contradiction types</h2>
-    <p class="section-intro">Not every contradiction has the same diagnostic value. The taxonomy below separates high-priority failures from lower-priority patterns so evaluation can focus first on the signals most likely to expose genuine instability.</p>
-    <div class="taxonomy-grid">
-      <article class="taxonomy-card featured">
-        <p class="taxonomy-rank">P0</p>
-        <h3>Conclusion flips</h3>
-        <p>Equivalent prompts produce opposite final answers. This is the clearest sign that a model does not hold a stable semantic position.</p>
-      </article>
-      <article class="taxonomy-card featured">
-        <p class="taxonomy-rank">P0</p>
-        <h3>Constraint violations</h3>
-        <p>The system states or implies a rule in one phrasing, then breaks that same rule under another phrasing.</p>
-      </article>
-      <article class="taxonomy-card featured">
-        <p class="taxonomy-rank">P0</p>
-        <h3>Refusal inconsistency</h3>
-        <p>A request that should trigger the same refusal boundary receives mixed treatment across equivalent formulations.</p>
-      </article>
-      <article class="taxonomy-card">
-        <p class="taxonomy-rank">P1</p>
-        <h3>Reasoning inconsistency</h3>
-        <p>The conclusion remains stable but the justification conflicts across variants, reducing auditability and trust.</p>
-      </article>
-      <article class="taxonomy-card">
-        <p class="taxonomy-rank">P1</p>
-        <h3>Assumption shifts</h3>
-        <p>The system quietly changes the frame of reference, such as jurisdiction or policy context, without making the shift explicit.</p>
-      </article>
-      <article class="taxonomy-card">
-        <p class="taxonomy-rank">P2</p>
-        <h3>Entity or fact drift</h3>
-        <p>The same entity receives conflicting attributes across equivalent queries, often overlapping with factual reliability concerns.</p>
-      </article>
+  <div class="priority-block p1-block">
+    <div class="priority-header">
+      <span class="priority-tag medium">P1 / P2 &mdash; Secondary Targets</span>
+      <span class="priority-sub">Important for auditability, depth analysis, and advanced CAI systems. Do not lead with these.</span>
     </div>
-  </section>
+    <div class="ct-grid ct-grid--2">
 
-  <section id="contradish">
-    <p class="section-label">Tool</p>
-    <h2>Contradish</h2>
-    <div class="content-grid">
-      <div>
-        <p>Contradish is the lab's testing platform for contradiction-focused evaluation. It is designed to check whether a system remains semantically consistent when the wording changes but the meaning does not.</p>
-        <p>Rather than score a single response in isolation, Contradish runs structured prompt variants, compares outputs, and surfaces contradiction patterns by type and severity. This makes it useful for model evaluation, prompt auditing, and deployment review.</p>
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank med">04</div>
+          <div>
+            <div class="ct-card-title">Reasoning Inconsistency</div>
+            <div class="ct-card-subtitle">Justification Conflict &middot; Medium Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Same final answer, contradictory reasoning paths. The answer is stable. The internal structure that produced it is not. A model that gets the right answer for conflicting reasons cannot be trusted.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Legal Reasoning</div>
+          <div class="ct-example-row"><span class="variant">Output A:</span><span class="out-a">"Legal because it's public data."</span></div>
+          <div class="ct-example-row"><span class="variant">Output B:</span><span class="out-b">"Legal because of implied consent."</span></div>
+          <div class="ct-example-row ct-example-row--gap" style="opacity:0.6"><span class="variant">Note:</span><span>These justifications conflict under edge cases</span></div>
+        </div>
+        <div class="ct-signal"><strong>Matters most in:</strong> Regulated domains, auditable AI systems. <span class="signal-badge medium">0.6&times; CTS</span></div>
       </div>
-      <div class="callout">
-        <h3>Typical workflow</h3>
-        <ol>
-          <li>Start with a base prompt or prompt set.</li>
-          <li>Generate meaning-preserving variants.</li>
-          <li>Run all variants against the target system.</li>
-          <li>Compare outputs for semantic conflict.</li>
-          <li>Report contradiction patterns and risk areas.</li>
-        </ol>
-      </div>
-    </div>
-    <p><a class="text-link" href="https://www.contradish.com/">Visit Contradish</a></p>
-  </section>
 
-  <section id="research">
-    <p class="section-label">Research</p>
-    <h2>Selected papers</h2>
-    <div class="papers-list">
-      <article class="paper-item">
-        <h3><a href="https://zenodo.org/records/16467706">CAI Terminology Declaration</a></h3>
-        <p>Defines the core vocabulary used across CAI, including semantic invariance, representation strain, and contradiction tension.</p>
-      </article>
-      <article class="paper-item">
-        <h3><a href="https://zenodo.org/records/17460056">Modular Blueprint for Safe General Intelligence</a></h3>
-        <p>Outlines structural design principles for AI systems that must remain coherent under the conditions CAI identifies as high risk.</p>
-      </article>
-      <article class="paper-item">
-        <h3><a href="https://zenodo.org/records/17460039">Six Systemic Laws for Safe Reasoning</a></h3>
-        <p>Presents a set of system-level constraints for reasoning safety and links them to contradiction-focused evaluation.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="contact">
-    <p class="section-label">Contact</p>
-    <h2>Get in touch</h2>
-    <div class="contact-card">
-      <div>
-        <p>Research inquiries, collaboration requests, and questions about CAI or Contradish are welcome.</p>
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank med">05</div>
+          <div>
+            <div class="ct-card-title">Hedging Polarity Shifts</div>
+            <div class="ct-card-subtitle">Confidence Instability &middot; Pre-Contradiction Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Confidence flips wildly across semantically equivalent prompts with no new information introduced. A pre-contradiction signal — useful for early CTS detection before the full flip appears.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Confidence Drift</div>
+          <div class="ct-example-row"><span class="variant">Variant A:</span><span class="out-a">"Definitely legal."</span></div>
+          <div class="ct-example-row"><span class="variant">Variant B:</span><span style="color:#ffd60a">"It depends heavily on context."</span></div>
+          <div class="ct-example-row"><span class="variant">Variant C:</span><span class="out-b">"Likely illegal in most jurisdictions."</span></div>
+        </div>
+        <div class="ct-signal"><strong>Use as:</strong> Early warning indicator in the CTS pipeline. <span class="signal-badge medium">0.5&times; CTS</span></div>
       </div>
-      <a class="button primary" href="mailto:mirrornetinquiries@gmail.com">mirrornetinquiries@gmail.com</a>
+
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank med">06</div>
+          <div>
+            <div class="ct-card-title">Implicit Assumption Shifts</div>
+            <div class="ct-card-subtitle">World Model Drift &middot; Subtle / High Depth</div>
+          </div>
+        </div>
+        <div class="ct-desc">No explicit contradiction. The underlying world model has quietly shifted. One answer assumes US law, the next assumes global law. Both look internally consistent. The contradiction is in the unstated frame.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Jurisdictional Drift</div>
+          <div class="ct-example-row"><span class="variant">Answer A:</span><span>Implicitly assumes US law throughout</span></div>
+          <div class="ct-example-row"><span class="variant">Answer B:</span><span class="out-b">Implicitly assumes EU / global law</span></div>
+          <div class="ct-example-row ct-example-row--gap" style="opacity:0.6"><span class="variant">Surface:</span><span>Both appear internally consistent</span></div>
+        </div>
+        <div class="ct-signal"><strong>Advanced:</strong> Requires world-model comparison infrastructure. High depth signal. <span class="signal-badge high">0.7&times; CTS</span></div>
+      </div>
+
+      <div class="ct-card">
+        <div class="ct-card-header">
+          <div class="ct-rank low">07</div>
+          <div>
+            <div class="ct-card-title">Entity / Fact Drift</div>
+            <div class="ct-card-subtitle">Representation Conflict &middot; Lower Signal</div>
+          </div>
+        </div>
+        <div class="ct-desc">Same entity, different attributes across equivalent queries. Overlaps with hallucination research, but under CAI framing this is a representation conflict not just a memory failure. Lower priority than logical contradictions.</div>
+        <div class="ct-example">
+          <div class="ct-example-label">Example &mdash; Factual Conflict</div>
+          <div class="ct-example-row"><span class="variant">Query A:</span><span class="out-a">Company founded: 2010</span></div>
+          <div class="ct-example-row"><span class="variant">Query B:</span><span class="out-b">Company founded: 2012</span></div>
+        </div>
+        <div class="ct-signal"><strong>Deprioritize</strong> in early deployments. Useful for knowledge-graph applications. <span class="signal-badge low">0.3&times; CTS</span></div>
+      </div>
+
     </div>
-  </section>
-</main>
+  </div>
+
+  <div class="ignore-block">
+    <div class="ignore-title">What to ignore</div>
+    <div class="ignore-items">
+      <div class="ignore-item"><span class="ignore-x">X</span> Minor wording differences with stylistic variation only</div>
+      <div class="ignore-item"><span class="ignore-x">X</span> Small reasoning differences that do not conflict</div>
+      <div class="ignore-item"><span class="ignore-x">X</span> Length or format variation without semantic conflict</div>
+    </div>
+    <div class="ignore-note">These dilute the signal. You are not detecting contradictions broadly. You are detecting <strong>failures of semantic invariance under transformation.</strong> That specificity is what makes CAI useful.</div>
+  </div>
+
+</section>
+
+<hr class="section-divider">
+
+<section id="scoring">
+  <div class="section-label">Measurement</div>
+  <h2>CAI Scoring: Contradiction Tension Score</h2>
+  <p>CAI faults are not binary. The Contradiction Tension Score (CTS) is a weighted measure of instability across a prompt surface. Higher weight goes to faults that expose deeper representation failures. P0 types carry maximum weight by design.</p>
+
+  <table class="score-table">
+    <thead>
+      <tr>
+        <th>Contradiction Type</th>
+        <th>CTS Weight</th>
+        <th>Priority</th>
+        <th>Deployment Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="score-row--critical">
+        <td>Conclusion Flips</td>
+        <td>1.0&times; <span class="score-bar-wrap"><span class="score-bar" style="width:100%"></span></span></td>
+        <td><span class="signal-badge critical">P0</span></td>
+        <td>Maximum signal. Always surface first. Your strongest CAI indicator.</td>
+      </tr>
+      <tr class="score-row--critical">
+        <td>Constraint Violations</td>
+        <td>0.9&times; <span class="score-bar-wrap"><span class="score-bar" style="width:90%"></span></span></td>
+        <td><span class="signal-badge critical">P0</span></td>
+        <td>Critical for production systems with policy, legal, or safety constraints.</td>
+      </tr>
+      <tr class="score-row--critical">
+        <td>Refusal Inconsistency</td>
+        <td>0.9&times; <span class="score-bar-wrap"><span class="score-bar" style="width:90%"></span></span></td>
+        <td><span class="signal-badge critical">P0</span></td>
+        <td>Highest urgency for safety teams. Easiest to demonstrate value with.</td>
+      </tr>
+      <tr>
+        <td>Implicit Assumption Shifts</td>
+        <td>0.7&times; <span class="score-bar-wrap"><span class="score-bar score-bar--orange" style="width:70%"></span></span></td>
+        <td><span class="signal-badge medium">P1</span></td>
+        <td>High depth. Needs world-model comparison infrastructure to catch reliably.</td>
+      </tr>
+      <tr>
+        <td>Reasoning Inconsistency</td>
+        <td>0.6&times; <span class="score-bar-wrap"><span class="score-bar score-bar--orange" style="width:60%"></span></span></td>
+        <td><span class="signal-badge medium">P1</span></td>
+        <td>Matters for auditability. Important in regulated domains.</td>
+      </tr>
+      <tr>
+        <td>Hedging Polarity Shifts</td>
+        <td>0.5&times; <span class="score-bar-wrap"><span class="score-bar score-bar--yellow" style="width:50%"></span></span></td>
+        <td><span class="signal-badge medium">P1</span></td>
+        <td>Pre-contradiction signal. Use to catch instability before the flip fully appears.</td>
+      </tr>
+      <tr>
+        <td>Entity / Fact Drift</td>
+        <td>0.3&times; <span class="score-bar-wrap"><span class="score-bar score-bar--dim" style="width:30%"></span></span></td>
+        <td><span class="signal-badge low">P2</span></td>
+        <td>Overlaps with hallucination eval. Deprioritize in early deployments.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="cts-box">
+    <div class="cts-box-col">
+      <h3>What CTS Measures</h3>
+      <div class="cts-item"><div class="cts-dot"></div><div class="cts-item-text"><strong>Semantic invariance failure rate:</strong> how often equivalent prompt pairs produce conflicting outputs</div></div>
+      <div class="cts-item"><div class="cts-dot"></div><div class="cts-item-text"><strong>Weighted instability:</strong> raw contradiction count adjusted by type weight and prompt surface coverage</div></div>
+      <div class="cts-item"><div class="cts-dot yellow"></div><div class="cts-item-text"><strong>Tension zone mapping:</strong> which semantic regions of the model's space are highest-entropy</div></div>
+      <div class="cts-item"><div class="cts-dot green"></div><div class="cts-item-text"><strong>Stability gradient:</strong> how instability scales as prompt variation distance increases</div></div>
+    </div>
+    <div class="cts-box-col">
+      <h3>What CTS Does Not Measure</h3>
+      <div class="cts-item"><div class="cts-dot" style="background:#444"></div><div class="cts-item-text"><strong>Minor wording differences</strong> that produce stylistic variation without semantic conflict</div></div>
+      <div class="cts-item"><div class="cts-dot" style="background:#444"></div><div class="cts-item-text"><strong>Factual correctness in isolation</strong> — whether one answer is right is outside CAI scope</div></div>
+      <div class="cts-item"><div class="cts-dot" style="background:#444"></div><div class="cts-item-text"><strong>Reasoning length or quality variation</strong> that does not produce structural conflict</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="contradish">
+  <div class="section-label">Tools</div>
+  <h2>Contradish</h2>
+  <p>Contradish is the primary implementation of CAI detection. A reasoning stability testing platform built on one idea: <strong>unit testing for AI should test semantic invariance, not just output correctness.</strong></p>
+
+  <div class="contradish-block">
+    <h3>How Contradish Works</h3>
+    <p>Contradish runs the full contradiction taxonomy. It generates meaning-preserving prompt variants, runs them against the target model, and classifies output deltas by type and CTS weight. P0 fault classes are always surfaced first.</p>
+    <div class="pipeline-steps">
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">01</div>
+        <div class="pipeline-step-title">Prompt Intake</div>
+        <div class="pipeline-step-desc">Takes a base prompt or test suite from the developer</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">02</div>
+        <div class="pipeline-step-title">Variant Generation</div>
+        <div class="pipeline-step-desc">Generates semantically equivalent variants across transformation axes</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">03</div>
+        <div class="pipeline-step-title">Parallel Execution</div>
+        <div class="pipeline-step-desc">Runs all variants against the target model</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">04</div>
+        <div class="pipeline-step-title">Semantic Comparison</div>
+        <div class="pipeline-step-desc">Checks outputs for semantic conflict, not surface similarity</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipeline-step-num">05</div>
+        <div class="pipeline-step-title">CTS Report</div>
+        <div class="pipeline-step-desc">Weighted contradiction map with type classification and severity</div>
+      </div>
+    </div>
+    <a href="https://www.contradish.com/" class="contradish-cta">Visit Contradish</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="papers">
+  <div class="section-label">Research</div>
+  <h2>Featured Papers</h2>
+  <p>The theoretical foundation for CAI and the systemic laws that govern safe reasoning under compression constraints.</p>
+  <div class="papers-list">
+    <div class="paper-item">
+      <div class="paper-num">01</div>
+      <div class="paper-body">
+        <a href="https://zenodo.org/records/16467706" class="paper-title">CAI Terminology Declaration</a>
+        <div class="paper-desc">Defines the core vocabulary for CAI: semantic invariance, representation strain, contradiction tension. Sets the definitional boundaries that separate CAI analysis from hallucination research and robustness testing.</div>
+        <span class="paper-tag">Foundational &middot; Zenodo</span>
+      </div>
+    </div>
+    <div class="paper-item">
+      <div class="paper-num">02</div>
+      <div class="paper-body">
+        <a href="https://zenodo.org/records/17460056" class="paper-title">Modular Blueprint for Safe General Intelligence</a>
+        <div class="paper-desc">A structural framework for building AI systems that stay coherent under the conditions CAI flags as high-failure-risk. Architecture principles derived from how contradictions propagate through compressed representations.</div>
+        <span class="paper-tag">Architecture &middot; Zenodo</span>
+      </div>
+    </div>
+    <div class="paper-item">
+      <div class="paper-num">03</div>
+      <div class="paper-body">
+        <a href="https://zenodo.org/records/17460039" class="paper-title">Six Systemic Laws for Safe Reasoning</a>
+        <div class="paper-desc">Six invariant laws a reasoning system must satisfy to be considered safe under CAI analysis. These laws are operationalized directly in the Contradish testing framework.</div>
+        <span class="paper-tag">Theory &middot; Zenodo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="about">
+  <div class="section-label">About</div>
+  <h2>The Lab</h2>
+  <p>Contradiction Engineering Lab studies representation instability in intelligent systems. We build theoretical frameworks and measurement tools for understanding where and how cognitive coherence breaks under transformation.</p>
+  <div class="founder-block">
+    <div class="founder-badge">MJ</div>
+    <div class="founder-body">
+      <h3>Michele Joseph</h3>
+      <div class="founder-title">Founder &middot; Contradiction Engineering Lab</div>
+      <p>Originator of the Compression-Aware Intelligence framework and founder of Contradish. Michele's work focuses on the class of AI failures that correctness-only evaluation cannot see: the ones that only surface under semantic transformation testing.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-block">
+    <div>
+      <h3>Get in touch</h3>
+      <p>Research inquiries, collaboration, questions about CAI or Contradish.</p>
+    </div>
+    <a href="mailto:mirrornetinquiries@gmail.com" class="contact-email">mirrornetinquiries@gmail.com</a>
+  </div>
+</section>
 
 <footer class="site-footer">
-  <p>Contradiction Engineering Lab</p>
+  <div class="footer-left">
+    <strong>Contradiction Engineering Lab</strong> &middot; Founded by Michele Joseph
+  </div>
   <div class="footer-links">
     <a href="https://www.contradish.com/">Contradish</a>
-    <a href="https://zenodo.org/records/16467706">Research</a>
+    <a href="https://zenodo.org/records/16467706">Papers</a>
     <a href="mailto:mirrornetinquiries@gmail.com">Contact</a>
   </div>
-  <p>&copy; 2026 Michele Joseph</p>
+  <div class="footer-copy">&copy; 2026 Michele Joseph</div>
 </footer>
 
 </body>
